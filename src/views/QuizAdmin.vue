@@ -1,0 +1,177 @@
+<template>
+  <div>
+    <div class="container">
+      <div class="row">
+        <!-- quiz name, qustion and add button -->
+        <div class="col-6">
+          <div class="row">
+            <!-- question name box -->
+            <div class="col-8">
+              <div class="mb-2">
+                <label for="quizName" class="form-label">Quiz Name</label>
+                <input
+                  v-model="quizName"
+                  type="text"
+                  class="form-control"
+                  id="quizName"
+                  placeholder="Name"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- question form box -->
+          <div class="row">
+            <div class="col-8">
+              <div class="mb-3">
+                <label for="userQuestion" class="form-label">Questions</label>
+                <textarea
+                  v-model="question"
+                  class="form-control"
+                  id="userQuestion"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- answers -->
+          <div class="row">
+            <div class="col-8">
+              <input
+               
+                v-model="answerOne"
+                type="text"
+                class="form-control"
+                placeholder="Answer One" 
+              /> <input type="radio" v-model="answer" value="1">
+              <input
+                
+                v-model="answerTwo"
+                type="text"
+                class="form-control"
+                placeholder="Answer Two"
+              /> <input type="radio" v-model="answer" value="2">
+              <input
+                
+                v-model="answerThree"
+                type="text"
+                class="form-control"
+                placeholder="Answer Three"
+              /><input type="radio" v-model="answer" value="3">
+              <input
+               
+                v-model="answerFour"
+                type="text"
+                class="form-control"
+                placeholder="Answer Four"
+              />
+              <!-- TODO add method to mark right answer -->
+              <p>Click the right answer</p>
+            </div>
+            <div class="row">
+              <button @click="addToList" class="button">ADD</button>
+            </div>
+          </div>
+        </div>
+        <!-- create a question end -->
+
+        <!-- list of added questions -->
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12">
+              <p>List of questions</p>
+              <div>
+                <!-- TODO add list of made questions -->
+                <ul>
+                  <li v-for="question in userQuestions" :key="question.id">
+                    {{ question }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- page row end -->
+    </div>
+    <!-- container end -->
+  </div>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    quizName: undefined,
+    question: undefined,
+    answerOne: undefined,
+    answerTwo: undefined,
+    answerThree: undefined,
+    answerFour: undefined,
+    userQuestions: [],
+    counter: 0,
+    answer: 0,
+  }),
+
+  methods: {
+    addToList() {
+      this.userQuestions.push({
+        id: this.counter,
+        title: this.quizName,
+        question: this.question,
+        answers: [
+          { answers: this.answerOne, correct: this.answer == 1 },
+          { answers: this.answerTwo, correct: this.answer == 2 },
+          { answers: this.answerThree, correct: this.answer == 3 },
+          { answers: this.answerFour, correct: this.answer == 4 },
+        ],
+      });
+      this.counter++;
+      this.question = undefined;
+      this.question = undefined;
+      this.answerOne = { answers: undefined, correct: false };
+      this.answerTwo = { answers: undefined, correct: false };
+      this.answerThree = { answers: undefined, correct: false };
+      this.answerFour = { answers: undefined, correct: false };
+    },
+    correctAnswer(answer) {
+      if (answer.correct) {
+        answer.correct = false;
+        console.log(answer.correct);
+      } else {
+        answer.correct = true;
+        console.log(answer.correct);
+      }
+      this.correct = answer.answers + " is correct";
+    },
+  },
+};
+</script>
+
+<style scoped>
+.quizbox {
+  text-align: center;
+}
+button {
+  border: none;
+  padding: 10px;
+  height: 50px;
+  width: 100px;
+  margin: 10px;
+  color: white;
+  background-color: #f9c80e;
+  border-radius: 15px;
+}
+
+.button:hover {
+  background-color: #dbae0a;
+}
+
+.button:active {
+  background-color: #a88812;
+  box-shadow: grey 1px 2px inset;
+  transform: translateY(1px);
+}
+
+li {
+  list-style: none;
+}
+</style>

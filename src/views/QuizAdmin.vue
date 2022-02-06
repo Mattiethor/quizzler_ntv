@@ -36,36 +36,50 @@
           <!-- answers -->
           <div class="row">
             <div class="col-8">
-              <input
-               
-                v-model="answerOne"
-                type="text"
-                class="form-control"
-                placeholder="Answer One" 
-              /> <input type="radio" v-model="answer" value="1">
-              <input
-                
-                v-model="answerTwo"
-                type="text"
-                class="form-control"
-                placeholder="Answer Two"
-              /> <input type="radio" v-model="answer" value="2">
-              <input
-                
-                v-model="answerThree"
-                type="text"
-                class="form-control"
-                placeholder="Answer Three"
-              /><input type="radio" v-model="answer" value="3">
-              <input
-               
-                v-model="answerFour"
-                type="text"
-                class="form-control"
-                placeholder="Answer Four"
-              />
+              <!-- TODO add these inputs to component -->
+              <!-- input for answer one -->
+              <div class="row">
+                <div class="col">
+                  <input
+                    v-model="answerOne"
+                    type="text"
+                    class="form-control"
+                    placeholder="Answer One"
+                  />
+                  <input type="radio" v-model="answer" value="1" />
+                </div>
+              </div>
+              <!-- input for answer two -->
+              <div>
+                <input
+                  v-model="answerTwo"
+                  type="text"
+                  class="form-control"
+                  placeholder="Answer Two"
+                />
+                <input type="radio" v-model="answer" value="2" />
+              </div>
+              <!-- input for answer three -->
+              <div>
+                <input
+                  v-model="answerThree"
+                  type="text"
+                  class="form-control"
+                  placeholder="Answer Three"
+                /><input type="radio" v-model="answer" value="3" />
+              </div>
+              <!-- input for answer four -->
+              <div>
+                <input
+                  v-model="answerFour"
+                  type="text"
+                  class="form-control"
+                  placeholder="Answer Four"
+                /><input type="radio" v-model="answer" value="4" />
+              </div>
+
               <!-- TODO add method to mark right answer -->
-              <p>Click the right answer</p>
+              <p>Tick the right answer</p>
             </div>
             <div class="row">
               <button @click="addToList" class="button">ADD</button>
@@ -79,12 +93,15 @@
           <div class="row">
             <div class="col-12">
               <p>List of questions</p>
+             <b> {{quizName}}</b> 
               <div>
                 <!-- TODO add list of made questions -->
-                <ul>
-                  <li v-for="question in userQuestions" :key="question.id">
-                    {{ question }}
+                <ul class="list-group">
+                  <li class="list-group-item" v-for="question in userQuestions" :key="question.id">
+                   {{ question.question }}
                   </li>
+                  <div @click="setQuestions(userQuestions)" v-if="counter>0"><button >SAVE</button></div>
+                  
                 </ul>
               </div>
             </div>
@@ -112,8 +129,14 @@ export default {
   }),
 
   methods: {
+    setQuestions(quiestionList){
+      this.$store.commit("SET_QUESTIONS", quiestionList);
+    },
+
+   //todo check if you can fix title
     addToList() {
       this.userQuestions.push({
+       
         id: this.counter,
         title: this.quizName,
         question: this.question,
@@ -127,10 +150,10 @@ export default {
       this.counter++;
       this.question = undefined;
       this.question = undefined;
-      this.answerOne = { answers: undefined, correct: false };
-      this.answerTwo = { answers: undefined, correct: false };
-      this.answerThree = { answers: undefined, correct: false };
-      this.answerFour = { answers: undefined, correct: false };
+      this.answerOne = undefined;
+      this.answerTwo = undefined;
+      this.answerThree = undefined;
+      this.answerFour = undefined;
     },
     correctAnswer(answer) {
       if (answer.correct) {
@@ -147,9 +170,6 @@ export default {
 </script>
 
 <style scoped>
-.quizbox {
-  text-align: center;
-}
 button {
   border: none;
   padding: 10px;
@@ -173,5 +193,9 @@ button {
 
 li {
   list-style: none;
+}
+
+.float_l {
+  float: left;
 }
 </style>

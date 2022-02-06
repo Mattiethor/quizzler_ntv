@@ -6,8 +6,8 @@
       <div class="col-6">
         <div class="user-question-select">
           <ul>
-            <li v-for="question in UserQuestionsList" :key="question.id">
-              <button>{{ question.title }}</button>
+            <li v-for="(question, index) in UserQuestionsList" :key="index">
+              <button @click="checkList(question)">{{ question[0].title}}</button>
               <button class="edit-button">EDIT</button>
               <br>
               
@@ -34,6 +34,11 @@ export default {
       return this.$store.getters.getUserQuestions;
     },
   },
+  methods: {
+    checkList(obj){
+      console.log(obj)
+    }
+  }
 };
 </script>
 

@@ -12,27 +12,7 @@ export default new Vuex.Store({
     category: undefined,
     url: "https://api.trivia.willfry.co.uk/questions?categories=",
     // test questions
-    userQuestions:[{
-      id: 0,
-      title: "testquiz",
-      question: "This is a test question",
-      answers: [
-        {0: "Mr. big mac ", correct: true},
-        {1: "JFK", correct: false},
-        {2: "oreo", correct: false},
-        {3: "Big Ben", correct: false},
-      ]
-    },{
-      id: 1,
-      title: "testquiz 2",
-      question: "This is a test question",
-      answers: [
-        {0: "Mr. big mac ", correct: true},
-        {1: "JFK", correct: false},
-        {2: "oreo", correct: false},
-        {3: "Big Ben", correct: false},
-      ]
-    }]
+    userQuestions:[],
   },
 
   getters: {
@@ -64,6 +44,10 @@ export default new Vuex.Store({
     SET_HIGHSCORE(state, payload){
       state.highScore = payload
       console.log( "highscore",payload)
+    },
+    SET_QUESTIONS(state, payload){
+      state.userQuestions.push(payload)
+      console.log(payload)
     }
   },
   actions: {
@@ -77,8 +61,13 @@ export default new Vuex.Store({
 
     getCategory({ commit }, payload) {
       commit("SET_CATEGORY", payload)
+      
 
     },
+    setQuestions({commit}, payload){
+      commit("SET_QUESTIONS", payload)
+      console.log(payload)
+    }
   },
   modules: {
   }

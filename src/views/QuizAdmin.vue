@@ -100,7 +100,7 @@
                   <li class="list-group-item" v-for="question in userQuestions" :key="question.id">
                    {{ question.question }}
                   </li>
-                  <div @click="setQuestions(userQuestions)" v-if="counter>0"><button >SAVE</button></div>
+                  <router-link to="/create" ><div @click="setQuestions(userQuestions)" v-if="counter>0"><button class="button" >SAVE</button></div></router-link>
                   
                 </ul>
               </div>

@@ -13,6 +13,7 @@ export default new Vuex.Store({
     url: "https://api.trivia.willfry.co.uk/questions?categories=",
     // test questions
     userQuestions:[],
+    selectedUserQuiz: [],
   },
 
   getters: {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     getUserQuestions(state){
       return state.userQuestions
+    },
+    getCurrentUserQuiz(state){
+      return state.selectedUserQuiz
     }
 
   },
@@ -48,6 +52,11 @@ export default new Vuex.Store({
     SET_QUESTIONS(state, payload){
       state.userQuestions.push(payload)
       console.log(payload)
+    },
+    SET_CURRENT_QUIZ(state, payload){
+      state.selectedUserQuiz.push(payload)
+      
+
     }
   },
   actions: {
@@ -67,6 +76,9 @@ export default new Vuex.Store({
     setQuestions({commit}, payload){
       commit("SET_QUESTIONS", payload)
       console.log(payload)
+    },
+    setUserQuiz({commit}, payload){
+      commit("SET_CURRENT_QUIZ", payload)
     }
   },
   modules: {

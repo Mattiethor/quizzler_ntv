@@ -7,10 +7,11 @@
         <div class="user-question-select">
           <ul>
             <li v-for="(question, index) in UserQuestionsList" :key="index">
-              <button @click="checkList(question)">{{ question[0].title}}</button>
+             <router-link to="/userquiz" > <button @click="setCurrentQuiz(question)">{{ question[0].title}}</button></router-link>
               <button class="edit-button">EDIT</button>
               <br>
               
+              <!-- TODO add state for currenct questions -->
               <!-- user index to get the right question without getting the true or false -->
               <!--<div v-for="(answers, index) in question.answers" :key="index">{{answers[index]}}</div>  -->
             </li>
@@ -35,8 +36,8 @@ export default {
     },
   },
   methods: {
-    checkList(obj){
-      console.log(obj)
+    setCurrentQuiz(list){
+      this.$store.commit("SET_CURRENT_QUIZ", list);
     }
   }
 };

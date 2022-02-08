@@ -141,11 +141,13 @@ export default {
         title: this.quizName,
         question: this.question,
         answers: [
-          { answers: this.answerOne, correct: this.answer == 1 },
-          { answers: this.answerTwo, correct: this.answer == 2 },
-          { answers: this.answerThree, correct: this.answer == 3 },
-          { answers: this.answerFour, correct: this.answer == 4 },
-        ],
+          {answer: this.answerOne, correct: this.answer == 1 },
+          {answer: this.answerTwo, correct: this.answer == 2 },
+          {answer: this.answerThree, correct: this.answer == 3} ,
+          {answer: this.answerFour, correct: this.answer == 4 },
+        
+
+          ],
       });
       this.counter++;
       this.question = undefined;
@@ -155,16 +157,7 @@ export default {
       this.answerThree = undefined;
       this.answerFour = undefined;
     },
-    correctAnswer(answer) {
-      if (answer.correct) {
-        answer.correct = false;
-        console.log(answer.correct);
-      } else {
-        answer.correct = true;
-        console.log(answer.correct);
-      }
-      this.correct = answer.answers + " is correct";
-    },
+
   },
 };
 </script>

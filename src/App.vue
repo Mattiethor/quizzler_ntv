@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-dark my-navbar">
       <div class="container-fluid">
-        <router-link to="/mainmenu"><span><a class="navbar-brand">Quizzler</a></span></router-link>
+        <router-link to="/mainmenu" @click="setCurrentQuiz(undefined)" ><span><a class="navbar-brand">Quizzler</a></span></router-link>
       </div>
     </nav>
     <!-- navbar end -->
@@ -19,7 +19,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+    methods: {
+    setCurrentQuiz(list){
+      this.$store.commit("SET_CURRENT_QUIZ", list);
+    }
+  }
+};
 </script>
 
 <style>

@@ -56,6 +56,7 @@ export default new Vuex.Store({
     SET_CURRENT_QUIZ(state, payload){
       state.selectedUserQuiz.push(payload)
       
+      
 
     }
   },

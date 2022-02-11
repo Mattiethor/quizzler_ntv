@@ -54,10 +54,9 @@ export default new Vuex.Store({
       console.log(payload)
     },
     SET_CURRENT_QUIZ(state, payload){
-      state.selectedUserQuiz.push(payload)
+      state.selectedUserQuiz = payload
+      console.log(payload)
       
-      
-
     }
   },
   actions: {

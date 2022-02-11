@@ -1,23 +1,28 @@
 <template>
   <div>
-      <!-- TODO: fix col. -->
+    <!-- TODO: fix col. -->
     <div class="row">
       <div class="col-4"></div>
       <div class="col-6">
         <div class="user-question-select">
           <ul>
             <li v-for="(question, index) in UserQuestionsList" :key="index">
-             <router-link to="/userquiz" > <button @click="setCurrentQuiz(question)">{{ question[0].title}}</button></router-link>
+              <router-link to="/userquiz">
+                <button @click="setCurrentQuiz(question)">
+                  {{ question[0].title }}
+                </button></router-link
+              >
               <button class="edit-button">EDIT</button>
-              <br>
-              
+              <br />
+
               <!-- TODO add state for currenct questions -->
               <!-- user index to get the right question without getting the true or false -->
               <!--<div v-for="(answers, index) in question.answers" :key="index">{{answers[index]}}</div>  -->
             </li>
             <!-- use this to create a button as a routerlink. TODO-fix other buttons -->
-            <router-link to="/admin" tag="button" class="create-button">Create</router-link>
-            
+            <router-link to="/admin" tag="button" class="create-button"
+              >Create</router-link
+            >
           </ul>
         </div>
       </div>
@@ -36,10 +41,10 @@ export default {
     },
   },
   methods: {
-    setCurrentQuiz(list){
+    setCurrentQuiz(list) {
       this.$store.commit("SET_CURRENT_QUIZ", list);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -102,7 +107,7 @@ button:active {
   width: 100px;
   margin: 10px;
   color: white;
-  background-color: #F9C80E;
+  background-color: #f9c80e;
   border-radius: 15px;
 }
 

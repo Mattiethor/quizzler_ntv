@@ -1,27 +1,32 @@
 <template>
   <div>
-    <div>
-      <ul class="quizbox">
-        <li v-for="(quiz, index) in userQuiz" :key="index">
-          <h4>{{ quiz[counter].question }}</h4>
-          {{ counter }}<br />
-          <div>
-            <ul class="answerbox">
-              <li v-for="(answer, index) in quiz[counter].answers" :key="index">
-                <button
-                  @click="
-                    counter++;
-                    checkAnswer(answer);
-                  "
-                  class="button"
-                >
-                  {{ answer.answer }}
-                </button>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-5">
+        <div v-if="active == false" class="quizbox">
+          Score{{ score }}
+          <ul>
+            <li v-for="(question, index) in userQuiz" :key="index">
+              <h4>{{ question.question }}</h4>
+              <div class="answerbox">
+                <li v-for="(answers, index) in question.answers" :key="index">
+                  <button @click="checkAnswer(answers)" class="button">
+                    {{ answers.answer }}
+                  </button>
+                </li>
+              </div>
+            </li>
+            <button @click="setActive" class="button">Turn in</button>
+          </ul>
+        </div>
+        <div v-else-if="active == true" class="quizbox">
+          <h1>You scored: {{ score }}</h1>
+          <router-link to="/mainmenu"
+            ><button class="button" @click="setHighScore(score)">Main menu</button></router-link
+          >
+        </div>
+      </div>
+      <div class="col"></div>
     </div>
   </div>
 </template>
@@ -29,11 +34,11 @@
 <script>
 export default {
   data: () => ({
-    counter: 0,
     score: 0,
+    active: false,
   }),
   //todo fix state so it does not push multible quizes
-  // TODO https://stackoverflow.com/questions/60589393/how-can-i-get-the-length-of-a-computed-array-in-vue-js 
+  // TODO https://stackoverflow.com/questions/60589393/how-can-i-get-the-length-of-a-computed-array-in-vue-js
   //make a computed property that gets the lenght of the userQuiz
   computed: {
     userQuiz() {
@@ -45,7 +50,19 @@ export default {
       if (answer.correct == true) {
         this.score++;
         console.log(this.score);
+      } else {
+        
+        if (this.score <= 0) {
+          this.score = 0;
+        }
       }
+    },
+    setActive() {
+      this.active = true;
+      console.log(this.active);
+    },
+       setHighScore(score) {
+      this.$store.commit("SET_HIGHSCORE", score);
     },
   },
 };

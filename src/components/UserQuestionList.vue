@@ -12,12 +12,10 @@
                   {{ question[0].title }}
                 </button></router-link
               >
-              <button class="edit-button">EDIT</button>
+              <router-link to="/useredit"><button @click="edit(question, index)" class="edit-button">EDIT</button></router-link>
               <br />
 
-              <!-- TODO add state for currenct questions -->
               <!-- user index to get the right question without getting the true or false -->
-              <!--<div v-for="(answers, index) in question.answers" :key="index">{{answers[index]}}</div>  -->
             </li>
             <!-- use this to create a button as a routerlink. TODO-fix other buttons -->
             <router-link to="/admin" tag="button" class="create-button"
@@ -44,6 +42,13 @@ export default {
     setCurrentQuiz(list) {
       this.$store.commit("SET_CURRENT_QUIZ", list);
     },
+    edit(obj, index, ){
+      this.$store.commit("SET_CURRENT_QUIZ", obj);
+      this.$store.commit("SET_EDIT", index)
+
+
+
+    }
   },
 };
 </script>

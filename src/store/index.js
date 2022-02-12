@@ -11,7 +11,6 @@ export default new Vuex.Store({
     highScore: 0,
     category: undefined,
     url: "https://api.trivia.willfry.co.uk/questions?categories=",
-    // test questions
     userQuestions:[],
     selectedUserQuiz: [],
   },
@@ -57,6 +56,9 @@ export default new Vuex.Store({
       state.selectedUserQuiz = payload
       console.log(payload)
       
+    },
+    SET_EDIT(state, payload){
+      state.userQuestions.splice(payload, 1)
     }
   },
   actions: {
@@ -79,6 +81,9 @@ export default new Vuex.Store({
     },
     setUserQuiz({commit}, payload){
       commit("SET_CURRENT_QUIZ", payload)
+    },
+    setEdit({commit}, payload,){
+    commit("SET_EDIT", payload)
     }
   },
   modules: {

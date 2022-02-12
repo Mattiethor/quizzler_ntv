@@ -36,7 +36,7 @@
           <!-- answers -->
           <div class="row">
             <div class="col-8">
-              <!-- TODO add these inputs to component -->
+              
               <!-- input for answer one -->
               <div class="row">
                 <div class="col">
@@ -93,15 +93,25 @@
           <div class="row">
             <div class="col-12">
               <p>List of questions</p>
-             <b> {{quizName}}</b> 
+              <b> {{ quizName }}</b>
               <div>
                 <!-- TODO add list of made questions -->
                 <ul class="list-group">
-                  <li class="list-group-item" v-for="question in userQuestions" :key="question.id">
-                   {{ question.question }}
+                  <li
+                    class="list-group-item"
+                    v-for="question in userQuestions"
+                    :key="question.id"
+                  >
+                    {{ question.question }}
                   </li>
-                  <router-link to="/create" ><div @click="setQuestions(userQuestions)" v-if="counter>0"><button class="button" >SAVE</button></div></router-link>
-                  
+                  <router-link to="/create"
+                    ><div
+                      @click="setQuestions(userQuestions)"
+                      v-if="counter > 0"
+                    >
+                      <button class="button">SAVE</button>
+                    </div></router-link
+                  >
                 </ul>
               </div>
             </div>
@@ -129,25 +139,22 @@ export default {
   }),
 
   methods: {
-    setQuestions(quiestionList){
+    setQuestions(quiestionList) {
       this.$store.commit("SET_QUESTIONS", quiestionList);
     },
 
-   //todo check if you can fix title
+    //todo check if you can fix title
     addToList() {
       this.userQuestions.push({
-       
         id: this.counter,
         title: this.quizName,
         question: this.question,
         answers: [
-          {answer: this.answerOne, correct: this.answer == 1 },
-          {answer: this.answerTwo, correct: this.answer == 2 },
-          {answer: this.answerThree, correct: this.answer == 3} ,
-          {answer: this.answerFour, correct: this.answer == 4 },
-        
-
-          ],
+          { answer: this.answerOne, correct: this.answer == 1 },
+          { answer: this.answerTwo, correct: this.answer == 2 },
+          { answer: this.answerThree, correct: this.answer == 3 },
+          { answer: this.answerFour, correct: this.answer == 4 },
+        ],
       });
       this.counter++;
       this.question = undefined;
@@ -157,7 +164,6 @@ export default {
       this.answerThree = undefined;
       this.answerFour = undefined;
     },
-
   },
 };
 </script>

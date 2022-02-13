@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <!-- TODO see if you can move router=link from button to tag -->
-      <ul class="m-1">
+      
+      <ul >
         <li>
           <router-link to="/quiz">
             <button @click="setCategory(category)" class="quiz-button">

@@ -3,26 +3,30 @@
     <div class="row">
       <div class="col"></div>
       <div class="col-5">
-        <div v-if="active == false" class="quizbox">
-          Score{{ score }}
+        <div v-if="counter < userQuiz.length" class="quizbox">
           <ul>
-            <li v-for="(question, index) in userQuiz" :key="index">
-              <h4>{{ question.question }}</h4>
+            <li>
+              <h4>{{ userQuiz[counter].question }}</h4>
               <div class="answerbox">
-                <li v-for="(answers, index) in question.answers" :key="index">
+                <li
+                  @click="counter++"
+                  v-for="(answers, index) in userQuiz[counter].answers"
+                  :key="index"
+                >
                   <button @click="checkAnswer(answers)" class="button">
                     {{ answers.answer }}
                   </button>
                 </li>
               </div>
             </li>
-            <button @click="setActive" class="button">Turn in</button>
           </ul>
         </div>
-        <div v-else-if="active == true" class="quizbox">
+        <div v-if="counter + 1 > userQuiz.length" class="quizbox">
           <h1>You scored: {{ score }}</h1>
           <router-link to="/mainmenu"
-            ><button class="button" @click="setHighScore(score)">Main menu</button></router-link
+            ><button class="button" @click="setHighScore(score)">
+              Main menu
+            </button></router-link
           >
         </div>
       </div>
@@ -36,9 +40,10 @@ export default {
   data: () => ({
     score: 0,
     active: false,
+    counter: 0,
+    lenght: undefined,
   }),
-  //todo fix state so it does not push multible quizes
-  // TODO https://stackoverflow.com/questions/60589393/how-can-i-get-the-length-of-a-computed-array-in-vue-js
+
   //make a computed property that gets the lenght of the userQuiz
   computed: {
     userQuiz() {
@@ -51,7 +56,6 @@ export default {
         this.score++;
         console.log(this.score);
       } else {
-        
         if (this.score <= 0) {
           this.score = 0;
         }
@@ -61,7 +65,7 @@ export default {
       this.active = true;
       console.log(this.active);
     },
-       setHighScore(score) {
+    setHighScore(score) {
       this.$store.commit("SET_HIGHSCORE", score);
     },
   },

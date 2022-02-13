@@ -43,7 +43,7 @@ export default {
         this.text = "Perfect!";
       } else if (this.score > 5) {
         this.text = "Good job !";
-      } else if (this.score < 5) {
+      } else if (this.score <= 5) {
         this.text = "You can do better !";
       }
     },

@@ -7,8 +7,11 @@
           <div class="row">
             <!-- question name box -->
             <div class="col-8">
+              <br />
               <div class="mb-2">
-                <label for="quizName" class="form-label">Quiz Name</label>
+                <label for="quizName" class="form-label"
+                  ><h4>Quiz Name</h4>
+                </label>
                 <input
                   v-model="quizName"
                   type="text"
@@ -36,7 +39,6 @@
           <!-- answers -->
           <div class="row">
             <div class="col-8">
-              
               <!-- input for answer one -->
               <div class="row">
                 <div class="col">
@@ -78,11 +80,24 @@
                 /><input type="radio" v-model="answer" value="4" />
               </div>
 
-              <!-- TODO add method to mark right answer -->
+             
               <p>Tick the right answer</p>
             </div>
             <div class="row">
-              <button @click="addToList" class="button">ADD</button>
+              <button
+                v-if="
+                  question &&
+                  quizName &&
+                  answerOne &&
+                  answerTwo &&
+                  answerThree &&
+                  answerFour
+                "
+                @click="addToList"
+                class="button"
+              >
+                ADD
+              </button>
             </div>
           </div>
         </div>
@@ -92,7 +107,9 @@
         <div class="col-6">
           <div class="row">
             <div class="col-12">
-              <p>List of questions</p>
+              <br />
+              <h4>List of questions</h4>
+              <hr />
               <b> {{ quizName }}</b>
               <div>
                 <!-- TODO add list of made questions -->
@@ -147,6 +164,7 @@ export default {
     addToList() {
       this.userQuestions.push({
         id: this.counter,
+        
         title: this.quizName,
         question: this.question,
         answers: [

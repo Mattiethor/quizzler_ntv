@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container edit-container">
       <div class="row">
         <!-- old questions -->
         <div class="col-6">
           <ul class="list-group">
-            <p>Old questions</p>
-            <p>{{ userQuiz[0].title }}</p>
+            <h2>Old questions</h2>
+            <hr />
+
+            <h4>{{ userQuiz[0].title }}</h4>
             <li v-for="(question, index) in userQuiz" :key="index">
               <b>{{ question.question }}</b>
               <div>
@@ -18,14 +20,26 @@
                   {{ answers.answer }}
                 </li>
               </div>
-              Click old question to add them to the new question list
+
               <hr />
             </li>
+
+            <router-link to="/create"
+              ><div>
+                <button class="create-button">Delete Quiz</button>
+              </div></router-link
+            >
           </ul>
         </div>
         <div class="col-6">
           <div>
-            <p>New question {{ counter }}</p>
+            <ul class="list-group">
+              <li class="list-item">
+                <h2>New question {{ counter }}</h2>
+              </li>
+            </ul>
+
+            <hr />
             <div class="row">
               <!-- question name box -->
               <div class="col-8">
@@ -102,13 +116,34 @@
                 <p>Tick the right answer</p>
               </div>
               <div class="row">
-                   <button @click="addToList" class="button">ADD</button>
-                <router-link to="/create"
-                  ><div @click="setQuestions(userQuestions)" v-if="counter > 1">
-                    <button class="button">SAVE</button>
-                  </div></router-link
-                >
-               
+                <ul>
+                  <li>
+                    <button
+                      v-if="
+                        question &&
+                        quizName &&
+                        answerOne &&
+                        answerTwo &&
+                        answerThree &&
+                        answerFour
+                      "
+                      @click="addToList"
+                      class="button"
+                    >
+                      ADD
+                    </button>
+                  </li>
+                  <li>
+                    <router-link to="/create"
+                      ><div
+                        @click="setQuestions(userQuestions)"
+                        v-if="counter > 1"
+                      >
+                        <button class="button">SAVE</button>
+                      </div></router-link
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -176,4 +211,7 @@ export default {
 </script>
 
 <style>
+.edit-container {
+  margin-top: 20px;
+}
 </style>

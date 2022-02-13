@@ -2,33 +2,38 @@
   <div id="menu">
     <div class="container">
       <div class="row">
-        <div>
-          <h4 class="welcome">Welcome {{ userName }}</h4>
-          <p>Last score: {{ highScore }}</p>
+        <div class="col-12">
+          <div class="m-2">
+            <h4 class="welcome">Welcome {{ userName }}</h4>
+            <br />
+            <b
+              ><p>Last score: {{ highScore }}</p></b
+            >
 
-          <br />
-          <p>Please select a option</p>
+            <br />
+            <h5>Please select a option</h5>
+          </div>
         </div>
-      </div>
-      <!-- Todo add component list of quizzes -->
-      <div class="row">
-        <!-- option list -->
-        <!-- https://api.trivia.willfry.co.uk/questions?categories=general_knowledge&limit=5 -->
-        <div>
-          <QuizSelect text="General Knowlage" category="general_knowledge" />
-        </div>
-        <div><QuizSelect text="History" category="history" /></div>
-        <div><QuizSelect text="Movies" category="movies" /></div>
-        <div>
-          <ul>
-            <li>
-              <router-link to="/create"
-                ><button class="create-button">
-                  create a quiz
-                </button></router-link
-              >
-            </li>
-          </ul>
+        <!-- Todo add component list of quizzes -->
+        <div class="row">
+          <!-- option list -->
+          <!-- https://api.trivia.willfry.co.uk/questions?categories=general_knowledge&limit=5 -->
+          <div>
+            <QuizSelect text="General Knowlage" category="general_knowledge" />
+          </div>
+          <div><QuizSelect text="History" category="history" /></div>
+          <div><QuizSelect text="Movies" category="movies" /></div>
+          <div>
+            <ul>
+              <li>
+                <router-link to="/create"
+                  ><button class="create-button">
+                    create a quiz
+                  </button></router-link
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
